@@ -91,7 +91,7 @@ public class FieldBuilder {
             } else if (Schema.Type.STRUCT.equals(fieldSchema.type())) {
                 if (fieldSchema.parameters() != null
                         && fieldSchema.parameters().containsKey(PROTOBUF_TYPE)
-                        && fieldSchema.parameters().get(PROTOBUF_TYPE).equals(PROTOBUF_ONEOF_TYPE)) {
+                        && PROTOBUF_ONEOF_TYPE.equals(fieldSchema.parameters().get(PROTOBUF_TYPE))) {
                     buildOneof(fieldSchema, fieldName, tagNumber, fileDescriptorProtoBuilder,
                             messageDescriptorProtoBuilder, fieldBuilderMap);
                     continue;

@@ -55,8 +55,9 @@ public class ConnectDataToProtobufDataConverter {
             if (field.schema().type().equals(Schema.Type.MAP)) {
                 addMapField(fileDescriptor, dynamicMessageBuilder, field, fieldValue);
             } else if (field.schema().type().equals(Schema.Type.STRUCT)) {
-                if (field.schema().parameters().containsKey(PROTOBUF_TYPE)
-                        && field.schema().parameters().get(PROTOBUF_TYPE).equals(PROTOBUF_ONEOF_TYPE)) {
+                if (field.schema().parameters() != null
+                        && field.schema().parameters().containsKey(PROTOBUF_TYPE)
+                        && PROTOBUF_ONEOF_TYPE.equals(field.schema().parameters().get(PROTOBUF_TYPE))) {
                     for (Field oneofField : field.schema().fields()) {
                         addField(fileDescriptor, dynamicMessageBuilder, oneofField,
                                 ((Struct) fieldValue).get(oneofField));
